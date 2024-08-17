@@ -1,18 +1,39 @@
+import { useEffect } from "react";
 import { useAuthStore } from "../store"
 
 export const LoginPage = () => {
     const authStatus = useAuthStore(state => state.status);
+    const user = useAuthStore(state => state.user);
     const login = useAuthStore(state => state.login);
     const logout = useAuthStore(state => state.logout);
+
+    useEffect(() => {
+        setTimeout(() => {
+            logout();
+        }, 1500);
+    }, []);
 
     if (authStatus == 'checking') {
         return <div>Loading...</div>
     }
 
     return (
-        <div>
-            <h1>Login Page</h1>
-            <p>Status: {authStatus}</p>
-        </div>
+        <>
+            <h3>Login Page</h3>
+
+            {
+                authStatus === 'authenticated'
+                    ? <div>Authenticated as: {JSON.stringify(user, null, 2)} </div>
+                    : <h4>Not Authenticated</h4>
+
+            }
+
+            {
+                authStatus === 'authenticated'
+                    ? <button onClick={logout}>Logout</button>
+                    : <button onClick={() => login('miguel@testEmail.com', '123')}>Login</button>
+
+            }
+        </>
     );
 }

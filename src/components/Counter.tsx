@@ -13,7 +13,7 @@ export const Counter = () => {
 
     return (
         <>
-            <h1>Counter</h1>
+            <h3>Counter</h3>
             <p>Current count: {count} </p>
             <div>
                 <button onClick={ () => increaseBy(1)}>Increment</button>
