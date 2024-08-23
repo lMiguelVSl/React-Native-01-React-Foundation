@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect } from "react"
+import { ReqResUserResponse } from "../interfaces";
 
 export const UsersPage = () => {
 
     useEffect(() => {
-        axios.get('https://reqres.in/api/users?page=2')
+        axios.get<ReqResUserResponse>('https://reqres.in/api/users?page=2')
         .then(res => {
-            console.log(res.data.data);
+            console.log(res.data.data[0]);
         });
     }, []);
 
